@@ -8,7 +8,7 @@
 const app	= new Object()
 app.libs	= new Object()
 app.libs.discord= require("discord.js")
-app.reply	= require("reply")
+app.reply	= require("./util/index.js").reply
 app.client 	= new app.libs.discord.Client({
 	intents: [
 		app.libs.discord.GatewayIntentBits.MessageContent,
@@ -17,7 +17,7 @@ app.client 	= new app.libs.discord.Client({
 })
 const fs	= require("fs")
 app.config	= require("./config.js")
-app.debug	= require("debug")
+app.debug	= require("./util/index.js").debug
 app.debug("Initialized")
 // < —— 	Event Handler    	—— >
 
@@ -53,3 +53,6 @@ let token = require("./env.js")
 app.client.login(/*app.config.token*/token)
 .then(app.debug("Logged"))
 .catch(error => console.error(error))
+
+module.exports = app
+require("./util/index.js").config(app)

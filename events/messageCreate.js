@@ -12,6 +12,6 @@ module.exports = {
 			es: "No se ha encontrado el comando",
 			en: "Command not found"
 		})
-		commands(app, message, args)
+		commands.run(app, message, args)
 	}
 }
