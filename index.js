@@ -15,8 +15,6 @@ app.client 	= new app.libs.discord.Client({
 		new app.libs.discord.IntentsBitField(32767)
 	]
 })
-
-
 const fs	= require("fs")
 app.config	= require("./config.js")
 app.debug	= require("debug")
@@ -40,6 +38,7 @@ for(const dirs of commandDirs) {
 	}
 	app.debug("Commands", dirs)
 }
-app.client.login(app.config.token)
+let token = require("./env.js")
+app.client.login(/*app.config.token*/token)
 .then(app.debug("Logged"))
 .catch(error => console.error(error))
