@@ -13,7 +13,7 @@ The handler are so configurability, there's a list with all
 	Configurate the token are required.
 	Only put your bot token in config.js > Token. 
 2) Events & Commands folders:
-	In config.js are listed two folders, you can modify they names.
+	In config.js are listed two folders, you can modify the names.
 
 # reply
 The module reply send messages in a selected languages.
@@ -27,28 +27,27 @@ reply(message, {
 })
 ```
 
-The default language changes in config.js, or running by:
-```node . --lang="LANG"```
+The default language changes in config.js, or running by ```node . --lang="LANG"```
 
 Note: In handler are tagged "app.reply()"
 
 # debug
 
-The module debug log in console text, only appears if you run:
-```node . --debug```
+The module debug log in console text, only appears if you run```node . --debug```
+
 The functionaly is:
 ```
 const debug = require("./util/index.js").debug
 // • Simple:
 debug("Hi")
 
-//output: [DEBUG]: Hi
+#output: [DEBUG]: Hi
 
 // • Complete:
 var fruits = ["apple", "orange", "tomato"]
 debug("Fruits", fruits)
 
-//output: [DEBUG]: Fruits: apple, orange, tomato
+#output: [DEBUG]: Fruits: apple, orange, tomato
 ```
 
 Note: In handler are tagged "app.debug()"
