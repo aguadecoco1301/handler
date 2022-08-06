@@ -1,6 +1,10 @@
 # discordjs-pro-command-handler
 A complete Discord.js command and event handler! Miau
 
+# VersTho
+
+The official version are now 1.0.0
+
 # Configuration
 
 The handler are so configurability, there's a list with all
