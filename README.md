@@ -15,7 +15,7 @@ The handler are so configurable, there's a list with all modifications what you 
 2) Events & Commands folders:
 	In config.js are listed two folders, you can modify the names.
 3) Default language:
-	In config.js you can change "language" for spanish change "en" for "es"
+	In config.js you can change "language" for spanish changing "en" for "es"
 # reply
 The module reply send messages in a selected languages.
 The functionaly is easy:
