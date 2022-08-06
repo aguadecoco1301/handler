@@ -3,7 +3,7 @@ A complete Discord.js command and event handler! Miau
 
 # Configuration
 
-The handler are so configurability, that's a list with all
+The handler are so configurability, there's a list with all
 
 1) Token:
 	Configurate the token are required.
