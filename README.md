@@ -10,12 +10,14 @@ const reply = require("./util/index.js").reply
 reply(message, {
 	en: "Hi world!",
 	es: "Hola mundo!"
-})```
+})
+```
 
 The default language changes in config.js, or running by:
 ```node . --lang="LANG"```
 
 Note: In bot, was called "app.reply()"
+
 # debug
 
 The module debug log in console text, only appears if you run:
