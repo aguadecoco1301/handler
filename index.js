@@ -30,11 +30,22 @@ for(const file of eventsDir) {
 		event.run(app, ...args)
 	})
 }
+app.commands = new app.libs.discord.Collection()
+app.commands._config = new app.libs.discord.Collection()
 const commandDirs = fs.readdirSync(app.config.commands.dir)
 for(const dirs of commandDirs) {
-	const commands = fs.readdirSync(`${app.config.commands.dir}/${dirs}`)
+	const commands = fs.readdirSync(`${app.config.commands.dir}/${dirs}`).filter(f => f.endsWith(".js"))
 	for(const file of commands) {
 		app.debug("Loaded", file)
+		const cmdConf	= require(`./${app.config.commands.dir}/${dirs}/config.js`)
+		const cmd	= require(`./${app.config.commands.dir}/${dirs}/index.js`)
+		app.commands.set(cmdConf.name, cmd)
+		if(cmdConf.alias) {
+			cmdConf.alias.map(i => {
+				app.commands.set(i, cmd)
+			})
+		}
+		app.commands._config.set(cmdConf.name, cmdConf)
 	}
 	app.debug("Commands", dirs)
 }

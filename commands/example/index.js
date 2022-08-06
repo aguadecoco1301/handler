@@ -1,7 +1,8 @@
+//Hello! You can copy and paste this folder to
+//create a command fast
 module.exports = (app, message, args) => {
-		message.replyLang({
-			es: "Sexo",
-			en: "Sex"
-		})
-	}
+	app.reply(message, {
+		es: "Hola mundo",
+		en: "Hello world"
+	})
 }
