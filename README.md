@@ -1,6 +1,16 @@
 # discordjs-pro-command-handler
 A complete Discord.js command and event handler! Miau
 
+# Configuration
+
+The handler are so configurability, that's a list with all
+
+1) Token:
+	Configurate the token are required.
+	Only put your bot token in config.js > Token. 
+2) Events & Commands folders:
+	In config.js are listed two folders, you can modify they names.
+
 # reply
 The module reply send messages in a selected languages.
 The functionaly is easy:
@@ -16,7 +26,7 @@ reply(message, {
 The default language changes in config.js, or running by:
 ```node . --lang="LANG"```
 
-Note: In bot, was called "app.reply()"
+Note: In handler are tagged "app.reply()"
 
 # debug
 
@@ -37,5 +47,5 @@ debug("Fruits", fruits)
 //output: [DEBUG]: Fruits: apple, orange, tomato
 ```
 
-Note: In bot, was called "app.debug()"
+Note: In handler are tagged "app.debug()"
 
