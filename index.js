@@ -49,8 +49,7 @@ for(const dirs of commandDirs) {
 	}
 	app.debug("Commands", dirs)
 }
-let token = require("./env.js")
-app.client.login(/*app.config.token*/token)
+app.client.login(app.config.token)
 .then(app.debug("Logged"))
 .catch(error => console.error(error))
 
