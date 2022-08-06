@@ -7,14 +7,15 @@ The official version are now 1.0.0
 
 # Configuration
 
-The handler are so configurability, there's a list with all
+The handler are so configurable, there's a list with all modifications what you can edit
 
 1) Token:
 	Configurate the token are required.
 	Only put your bot token in config.js > Token. 
 2) Events & Commands folders:
 	In config.js are listed two folders, you can modify the names.
-
+3) Default language:
+	In config.js you can change "language" for spanish change "en" for "es"
 # reply
 The module reply send messages in a selected languages.
 The functionaly is easy:
@@ -41,13 +42,15 @@ const debug = require("./util/index.js").debug
 // • Simple:
 debug("Hi")
 
-#output: [DEBUG]: Hi
+#output: 
+#[DEBUG]: Hi
 
 // • Complete:
 var fruits = ["apple", "orange", "tomato"]
 debug("Fruits", fruits)
 
-#output: [DEBUG]: Fruits: apple, orange, tomato
+#output: 
+#[DEBUG]: Fruits: apple, orange, tomato
 ```
 
 Note: In handler are tagged "app.debug()"

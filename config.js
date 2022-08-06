@@ -6,7 +6,7 @@ let config = {
 	commands: {
 		dir: "./commands"
 	},
-	language: "es"
+	language: "en"
 }
 
 module.exports = config
