@@ -57,6 +57,7 @@ for(const dirs of commandDirs) {
 		if(cmdConf.alias) {
 			cmdConf.alias.map(i => {
 				app.commands.set(i, cmd)
+				app.commands._config.set(i, cmdConf)
 			})
 		}
 		app.commands._config.set(cmdConf.name, cmdConf)
