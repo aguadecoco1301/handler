@@ -5,23 +5,34 @@
 ===========================================================
 \*							*/
 
+// < ——		App			—— >
 const app	= new Object()
 app.libs	= new Object()
+
+// < —— 	Libraries		—— >
 app.libs.discord= require("discord.js")
-app.reply	= require("./util/index.js").reply
+app.libs.fs	= require("fs")
+app.libs.JSONdb = require("simple-json-db")
+
+// < ——		Discord Client		—— >
 app.client 	= new app.libs.discord.Client({
 	intents: [
 		app.libs.discord.GatewayIntentBits.MessageContent,
 		new app.libs.discord.IntentsBitField(32767)
 	]
 })
-const fs	= require("fs")
 app.config	= require("./config.js")
+
+// < ——		Utils			—— >
+app.reply       = require("./util/index.js").reply
 app.debug	= require("./util/index.js").debug
-app.debug("Initialized")
+
+// < ——		Database		—— >
+app.database	= new app.libs.JSONdb("data.json")
+
 // < —— 	Event Handler    	—— >
 
-const eventsDir = fs.readdirSync(app.config.events.dir).filter(f => f.endsWith(".js"))
+const eventsDir = app.libs.fs.readdirSync(app.config.events.dir).filter(f => f.endsWith(".js"))
 for(const file of eventsDir) {
 	app.debug("Loaded", file)
 	const event = require(`${app.config.events.dir}/${file}`)
@@ -30,11 +41,14 @@ for(const file of eventsDir) {
 		event.run(app, ...args)
 	})
 }
+
+// < ——		Command Handler		—— >
+
 app.commands = new app.libs.discord.Collection()
 app.commands._config = new app.libs.discord.Collection()
-const commandDirs = fs.readdirSync(app.config.commands.dir)
+const commandDirs = app.libs.fs.readdirSync(app.config.commands.dir)
 for(const dirs of commandDirs) {
-	const commands = fs.readdirSync(`${app.config.commands.dir}/${dirs}`).filter(f => f.endsWith(".js"))
+	const commands = app.libs.fs.readdirSync(`${app.config.commands.dir}/${dirs}`).filter(f => f.endsWith(".js"))
 	for(const file of commands) {
 		app.debug("Loaded", file)
 		const cmdConf	= require(`./${app.config.commands.dir}/${dirs}/config.js`)
@@ -49,9 +63,9 @@ for(const dirs of commandDirs) {
 	}
 	app.debug("Commands", dirs)
 }
+// < ——		Log-in			—— >
 app.client.login(app.config.token)
 .then(app.debug("Logged"))
 .catch(error => console.error(error))
 
-module.exports = app
 require("./util/index.js").config(app)

@@ -17,6 +17,9 @@ exports.debug = (text, ...args) => {
 }
 exports.reply = (message, {...lang}) => {
 	let language = argv.lang || app.config.language
+	if(app.database.has(message.guildId.toString())) {
+		language = app.database.get(message.guildId.toString()).lang
+	}
         switch(language) {
                 case "es":
                         message.reply(lang.es)
