@@ -1,7 +1,6 @@
-.gitignore
+.*
 package.json
 package-lock.json
 node_modules
-.npm
 env.js
 data.json
