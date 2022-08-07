@@ -3,6 +3,9 @@ module.exports = {
 	run: (app, message) => {
 		if(message.author.bot) return
 		let prefix = "."
+		if(app.database.has(message.guildId.toString())) {
+			prefix = app.database.get(message.guildId.toString()).prefix
+		}
 		let args = message.content.slice(prefix.length).trim().split(" ")
 		let cmd = args.shift()?.toLowerCase()
 
