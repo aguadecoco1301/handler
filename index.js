@@ -9,6 +9,14 @@
 const app	= new Object()
 app.libs	= new Object()
 
+/*
+	• app is a global object.
+	• You can save variables; libraries; and
+	more, for next use that in any part of
+	the code.
+	• You can edit that how you need
+*/
+
 // < —— 	Libraries		—— >
 app.libs.discord= require("discord.js")
 app.libs.fs	= require("fs")
@@ -23,18 +31,18 @@ app.client 	= new app.libs.discord.Client({
 })
 app.config	= require("./config.js")
 
-// < ——		Utils			—— >
-app.reply       = require("./util/index.js").reply
-app.debug	= require("./util/index.js").debug
+// < ——		Util			—— >
+let util 	= require("./util/index.js").send(app)
+app.reply       = util.reply
+app.log		= util.log
 
 // < ——		Database		—— >
 app.database	= new app.libs.JSONdb("data.json")
 
 // < —— 	Event Handler    	—— >
-
 const eventsDir = app.libs.fs.readdirSync(app.config.events.dir).filter(f => f.endsWith(".js"))
+
 for(const file of eventsDir) {
-	app.debug("Loaded", file)
 	const event = require(`${app.config.events.dir}/${file}`)
 
 	app.client.on(event.name, (...args) => {
@@ -47,26 +55,34 @@ for(const file of eventsDir) {
 app.commands = new app.libs.discord.Collection()
 app.commands._config = new app.libs.discord.Collection()
 const commandDirs = app.libs.fs.readdirSync(app.config.commands.dir)
-for(const dirs of commandDirs) {
+for(const dirs of commandDirs) { //./commands/$
 	const commands = app.libs.fs.readdirSync(`${app.config.commands.dir}/${dirs}`).filter(f => f.endsWith(".js"))
-	for(const file of commands) {
-		app.debug("Loaded", file)
+	commands.forEach(() => { //./commands/$comando/$
 		const cmdConf	= require(`./${app.config.commands.dir}/${dirs}/config.js`)
 		const cmd	= require(`./${app.config.commands.dir}/${dirs}/index.js`)
 		app.commands.set(cmdConf.name, cmd)
+		app.commands._config.set(cmdConf.name, cmdConf)
 		if(cmdConf.alias) {
-			cmdConf.alias.map(i => {
-				app.commands.set(i, cmd)
-				app.commands._config.set(i, cmdConf)
+			cmdConf.alias.map(alias => {
+				app.commands.set(alias, cmd)
+				app.commands._config.set(alias, cmdConf)
 			})
 		}
-		app.commands._config.set(cmdConf.name, cmdConf)
 	}
-	app.debug("Commands", dirs)
 }
+/*
+
+	• El command handler usa para los alias la
+	creación de un nuevo comando, por ende,
+	añadir un alias es como crear otra carpeta
+	con otro comando.
+
+	• La configuración se guarda en el objeto
+	app.commands._config.
+
+*/
+
 // < ——		Log-in			—— >
 app.client.login(app.config.token)
-.then(app.debug("Logged"))
+.then(app.log("Logged"))
 .catch(error => console.error(error))
-
-require("./util/index.js").config(app)

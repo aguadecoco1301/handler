@@ -3,7 +3,7 @@ A complete Discord.js command and event handler! Miau
 
 # Version
 
-The official version are now 1.0.0
+The official version are 2.0.0
 
 # Configuration
 
@@ -20,9 +20,7 @@ The handler are so configurable, there's a list with all modifications what you 
 The module reply send messages in a selected languages.
 The functionaly is easy:
 ```
-const reply = require("./util/index.js").reply
-
-reply(message, {
+app.reply(message, {
 	en: "Hi world!",
 	es: "Hola mundo!"
 })
@@ -30,28 +28,24 @@ reply(message, {
 
 The default language changes in config.js, or running by ```node . --lang="LANG"```
 
-Note: In handler are tagged "app.reply()"
+# log
 
-# debug
-
-The module debug log in console text, only appears if you run```node . --debug```
+The log module send text to console.
+Can occult if you run```node . --no-log```
 
 The functionaly is:
 ```
-const debug = require("./util/index.js").debug
 // • Simple:
-debug("Hi")
+
+app.log("Hi")
 
 #output: 
-#[DEBUG]: Hi
+#[BOT]: Hi
 
 // • Complete:
 var fruits = ["apple", "orange", "tomato"]
-debug("Fruits", fruits)
+app.log("Fruits", fruits)
 
 #output: 
-#[DEBUG]: Fruits: apple, orange, tomato
+#[BOT]: Fruits: apple, orange, tomato
 ```
-
-Note: In handler are tagged "app.debug()"
-
