@@ -3,7 +3,7 @@ A complete Discord.js command and event handler! Miau
 
 # Version
 
-The official version are 2.0.0
+The official version are 1.6.0
 
 # Configuration
 

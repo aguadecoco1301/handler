@@ -72,13 +72,12 @@ for(const dirs of commandDirs) { //./commands/$
 }
 /*
 
-	• El command handler usa para los alias la
-	creación de un nuevo comando, por ende,
-	añadir un alias es como crear otra carpeta
-	con otro comando.
+	• The command handler use for the alias a
+	creation of a new command. Then, add a alias
+	is how create other folder with other command.
 
-	• La configuración se guarda en el objeto
-	app.commands._config.
+	• The config is saved in the object
+	app.commands._config
 
 */
 

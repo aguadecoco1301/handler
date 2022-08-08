@@ -5,7 +5,7 @@ const { color } = require('console-log-colors')
 
 exports.send = (app) => {
 	exports.log = (text, ...args) => {
-		if(!argv.debug) return
+		if(argv.no-log) return
 		const isArgs = args.length !== 0;
 		if(isArgs) {
 			console.log(`${color.cyan("[BOT]")}: ${text}: ${color.blueBright(args.join(", "))}`)
