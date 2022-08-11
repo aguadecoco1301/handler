@@ -1,6 +1,6 @@
 module.exports = {
-	name: "ready",
-	run: (app) => {
-		app.log("Loaded ready")
-	}
+name: "ready",
+run: (app) => {
+	app.log("Logged")
+}
 }

@@ -8,7 +8,7 @@
 	• Please, don't edit this file.
 	• This handler is in development, then, update
 	the handler is important.
-	• Modify "extra.js" 
+	• Modify "extra.js"
 */
 // < ——		App			—— >
 const app	= new Object()
@@ -48,7 +48,6 @@ app.database	= new app.libs.JSONdb("data.json")
 
 // < —— 	Event Handler    	—— >
 const eventsDir = app.libs.fs.readdirSync(app.config.events.dir).filter(f => f.endsWith(".js"))
-
 for(const file of eventsDir) {
 	const event = require(`${app.config.events.dir}/${file}`)
 
@@ -85,7 +84,6 @@ for(const dirs of commandDirs) { //./commands/$
 	• The command handler use for the alias a
 	creation of a new command. Then, add a alias
 	is how create other folder with other command.
-
 	• The config is saved in the object
 	app.commands._config
 
@@ -93,11 +91,10 @@ for(const dirs of commandDirs) { //./commands/$
 
 // < ——		Log-in			—— >
 app.client.login(app.config.token)
-.then(app.log("Logged"))
+.then(app.log("Log-in..."))
 .catch(error => console.error(error))
 
 // < ——		Extra			—— >
 
 let extra = require("extra.js")
 extra(app)
-
