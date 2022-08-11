@@ -19,7 +19,7 @@ let config = {
 		}
 	},
 	default: {
-		lang: "es", //Default language
+		lang: "en", //Default language
 		prefix: "." //Default prefix
 	}
 }
