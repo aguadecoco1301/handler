@@ -1,5 +1,5 @@
 let config = {
-	token: "MTAwMzEwMTA2NTA2MDgyNzE3Ng.GqNthX.FRmQofXs7tEyjWwDZFUywK-uOBNLnoGIftnOBc",//"YOUR TOKEN HERE",
+	token: "YOUR TOKEN HERE",
 	events: {
 		dir: "./events"
 	},
