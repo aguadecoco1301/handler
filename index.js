@@ -74,6 +74,9 @@ for(const dirs of commandDirs) { //./commands/$
 				app.commands._config.set(alias, cmdConf)
 			})
 		}
+		if(cmdConf.allow_slash) {
+			//slash
+		}
 	})
 }
 /*

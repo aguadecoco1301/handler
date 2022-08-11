@@ -11,6 +11,10 @@ The handler includes fast-config.js script. They help you to configure the bot.
 Run ```node fast-config.js```
 and complete all data
 
+# Slash commands
+
+The handler support slash command, with the decision of add or not.
+Just change "allow_slash" in command config to true.
 
 # Configuration
 
