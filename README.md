@@ -3,7 +3,14 @@ A complete Discord.js command and event handler! Miau
 
 # Version
 
-The official version are 1.6.0
+The official version are 2.0.0
+
+# Fast config
+
+The handler includes fast-config.js script. They help you to configure the bot.
+Run ```node fast-config.js```
+and complete all data
+
 
 # Configuration
 
