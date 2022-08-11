@@ -1,5 +1,5 @@
 // Hey! You can add here more code for the index.js,
-// to update without lost code.
+// to update handler without lost code.
 module.exports = (app) => {
 
 }
