@@ -3,30 +3,40 @@ const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
 const { color } = require('console-log-colors')
 
-exports.send = (app) => {
-	exports.log = (text, ...args) => {
-		if(argv.no-log) return
-		const isArgs = args.length !== 0;
-		if(isArgs) {
-			console.log(`${color.cyan("[BOT]")}: ${text}: ${color.blueBright(args.join(", "))}`)
-		} else {
-			console.log(`${color.cyan("[BOT]")}: ${text}`)
-		}
+let app
+exports.send = (appl) => {
+	app = appl
+}
+exports.log = (text, ...args) => {
+	if(argv.nolog) return
+	const isArgs = args.length !== 0
+	if(isArgs) {
+		console.log(`${color.cyan("[BOT]")}: ${text}: ${color.blueBright(args.join(", "))}`)
+	} else {
+		console.log(`${color.cyan("[BOT]")}: ${text}`)
 	}
-	exports.reply = (message, {...lang}) => {
-		let language = argv.lang || app.config.lang
-		if(app.database.has(message.guildId.toString())) {
-			language = app.database.get(message.guildId.toString()).lang
+}
+exports.lang = ({...lang}, message) => {
+	let language = argv.lang || app.config.default.lang
+	if(app.database.has(message.guildId.toString())) {
+		language = app.database.get(message.guildId.toString()).lang
+	}
+}
+exports.get = (guild) => {
+	if(has) {
+		const get = app.database.get(guild)
+		const has = app.database.has(guild)
+		let res = {
+			prefix: get.prefix,
+			lang: get.lang
 		}
-        	switch(language) {
-                	case "es":
-                	        message.reply(lang.es)
-                        	break
- 			case "en":
-        	                message.reply(lang.en)
-                	        break
-                	default:
-				break
-        	}
+		return res
+	} else {
+		const default = app.config.default
+		let res = {
+			prefix: default.prefix,
+			lang: default.lang
+		}
+		return res
 	}
 }

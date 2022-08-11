@@ -1,6 +1,6 @@
 module.exports = {
 	name: "ready",
 	run: (app) => {
-		app.debug("Loaded ready")
+		app.log("Loaded ready")
 	}
 }

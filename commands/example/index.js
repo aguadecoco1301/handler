@@ -1,8 +1,9 @@
 //Hello! You can copy and paste this folder to
 //fast create a command
 exports.run = (app, message, args) => {
-	app.reply(message, {
+	message.reply(app.lang({
+		en: "Hello world",
 		es: "Hola mundo",
-		en: "Hello world"
-	})
+		nashe: "ajsj"
+	}, message))
 }
