@@ -14,24 +14,34 @@ The handler are so configurable, there's a list with all modifications what you 
 	Only put your bot token in config.js > Token. 
 2) Events & Commands folders:
 	In config.js are listed two folders, you can modify the names.
-3) Default language:
-	In config.js you can change "language" for spanish changing "en" for "es"
-# reply
-The module reply send messages in a selected languages.
+3) Default prefix & language:
+	In default of config.js you can change "language" for spanish changing "en" for "es", and default token.
+
+# extra.js
+
+The handler are in development, so, updating is necesary.
+Then, if you need input code in index.js, just put in extra.js.
+
+# app.lang
+The module reply return a text in a selected language, reffered by guild.
 The functionaly is easy:
 ```
-app.reply(message, {
+app.lang({
 	en: "Hi world!",
 	es: "Hola mundo!"
-})
+}, message)
+# output:
+# "Hi world!"
+# or:
+# "Hola mundo!"
 ```
 
-The default language changes in config.js, or running by ```node . --lang="LANG"```
+Change the default language in config.js, or running by ```node . --lang="LANG"```
 
-# log
+# app.log
 
-The log module send text to console.
-Can occult if you run```node . --no-log```
+The log module send text in console.
+Can be occulted running ```node . --no-log```
 
 The functionaly is:
 ```
