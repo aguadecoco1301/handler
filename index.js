@@ -4,7 +4,12 @@
 ≈≈≈		☆ Made with ♡ in Argentina	        ≈≈≈
 ===========================================================
 \*							*/
-
+/*
+	• Please, don't edit this file.
+	• This handler is in development, then, update
+	the handler is important.
+	• Modify "extra.js" 
+*/
 // < ——		App			—— >
 const app	= new Object()
 app.libs	= new Object()
@@ -32,9 +37,11 @@ app.client 	= new app.libs.discord.Client({
 app.config	= require("./config.js")
 
 // < ——		Util			—— >
-let util 	= require("./util/index.js").send(app)
-app.reply       = util.reply
+let util 	= require("./util/index.js")
+app.lang	= util.lang
 app.log		= util.log
+app.get		= util.get
+util.send(app)
 
 // < ——		Database		—— >
 app.database	= new app.libs.JSONdb("data.json")
@@ -68,7 +75,10 @@ for(const dirs of commandDirs) { //./commands/$
 				app.commands._config.set(alias, cmdConf)
 			})
 		}
-	}
+		if(Object.keys(app.commands.get(cmdConf.name)).length >= 2) {
+			console.log("error")
+		}
+	})
 }
 /*
 
@@ -85,3 +95,9 @@ for(const dirs of commandDirs) { //./commands/$
 app.client.login(app.config.token)
 .then(app.log("Logged"))
 .catch(error => console.error(error))
+
+// < ——		Extra			—— >
+
+let extra = require("extra.js")
+extra(app)
+
