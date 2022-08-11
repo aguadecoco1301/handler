@@ -50,7 +50,6 @@ app.database	= new app.libs.JSONdb("data.json")
 const eventsDir = app.libs.fs.readdirSync(app.config.events.dir).filter(f => f.endsWith(".js"))
 for(const file of eventsDir) {
 	const event = require(`${app.config.events.dir}/${file}`)
-
 	app.client.on(event.name, (...args) => {
 		event.run(app, ...args)
 	})
@@ -58,9 +57,10 @@ for(const file of eventsDir) {
 
 // < ——		Command Handler		—— >
 
-app.commands = new app.libs.discord.Collection()
-app.commands._config = new app.libs.discord.Collection()
-const commandDirs = app.libs.fs.readdirSync(app.config.commands.dir)
+app.commands		= new app.libs.discord.Collection()
+app.commands._config	= new app.libs.discord.Collection()
+app.commands.alias	= new app.libs.discord.Collection()
+const commandDirs	= app.libs.fs.readdirSync(app.config.commands.dir)
 for(const dirs of commandDirs) { //./commands/$
 	const commands = app.libs.fs.readdirSync(`${app.config.commands.dir}/${dirs}`).filter(f => f.endsWith(".js"))
 	commands.forEach(() => { //./commands/$comando/$
@@ -70,22 +70,18 @@ for(const dirs of commandDirs) { //./commands/$
 		app.commands._config.set(cmdConf.name, cmdConf)
 		if(cmdConf.alias) {
 			cmdConf.alias.map(alias => {
-				app.commands.set(alias, cmd)
+				app.commands.alias.set(alias, cmd)
 				app.commands._config.set(alias, cmdConf)
 			})
-		}
-		if(Object.keys(app.commands.get(cmdConf.name)).length >= 2) {
-			console.log("error")
 		}
 	})
 }
 /*
 
-	• The command handler use for the alias a
-	creation of a new command. Then, add a alias
-	is how create other folder with other command.
-	• The config is saved in the object
+	• The command's config is saved in the object
 	app.commands._config
+	• The command's aliases is saved in the object
+	app.commands.alias
 
 */
 
