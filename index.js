@@ -26,7 +26,6 @@ app.libs	= new Object()
 app.libs.discord= require("discord.js")
 app.libs.fs	= require("fs")
 app.libs.JSONdb = require("simple-json-db")
-
 // < ——		Discord Client		—— >
 app.client 	= new app.libs.discord.Client({
 	intents: [
@@ -89,11 +88,13 @@ for(const dirs of commandDirs) { //./commands/$
 */
 
 // < ——		Log-in			—— >
-app.client.login(app.config.token)
+require('dotenv').config();
+console.log(process.env.token)
+app.client.login(`${process.env.token}`)
 .then(app.log("Log-in..."))
 .catch(error => console.error(error))
 
 // < ——		Extra			—— >
 
-let extra = require("extra.js")
+let extra = require("./extra.js")
 extra(app)

@@ -1,6 +1,10 @@
 # discordjs-pro-command-handler
 A complete Discord.js command and event handler! Miau
 
+# Token
+
+Put your bot token in a new file, call they ".data"
+
 # Version
 
 The official version are 1.8.0
