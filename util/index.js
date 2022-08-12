@@ -17,25 +17,26 @@ exports.log = (text, ...args) => {
 	}
 }
 exports.lang = ({...lang}, message) => {
-	let language = argv.lang || app.config.default.lang
+	let language = argv.lang || app.config.default.language
 	if(app.database.has(message.guildId.toString())) {
 		language = app.database.get(message.guildId.toString()).lang
 	}
+	return lang[language]
 }
 exports.get = (guild) => {
+	const has = app.database.has(guild)
 	if(has) {
 		const get = app.database.get(guild)
-		const has = app.database.has(guild)
 		let res = {
 			prefix: get.prefix,
 			lang: get.lang
 		}
 		return res
 	} else {
-		const default = app.config.default
+		const cDefault = app.config.default
 		let res = {
-			prefix: default.prefix,
-			lang: default.lang
+			prefix: cDefault.prefix,
+			lang: cDefault.lang
 		}
 		return res
 	}

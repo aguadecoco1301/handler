@@ -4,6 +4,5 @@ exports.run = (app, message, args) => {
 	message.reply(app.lang({
 		en: "Hello world",
 		es: "Hola mundo",
-		nashe: "ajsj"
 	}, message))
 }

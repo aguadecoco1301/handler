@@ -2,12 +2,12 @@ module.exports = {
 name: "messageCreate",
 run: (app, message) => {
 	if(message.author.bot) return
-	if(!message.content.startsWith(prefix)) return
 	let guild = message.guildId.toString()
 	let prefix = app.get(guild).prefix
 
+	if(!message.content.startsWith(prefix)) return
 	let args = message.content.slice(prefix.length).trim().split(" ")
-	let cmd = args.first().toLowerCase()
+	let cmd = args.shift()?.toLowerCase()
 
 	let commands = app.commands.get(cmd)
 	let config = app.commands._config.get(cmd)
@@ -29,7 +29,7 @@ run: (app, message) => {
 	}
 
 	if(config.permissions) {
-		if(!message.member.permissions.has(config.permissions) {
+		if(!message.member.permissions.has(config.permissions)) {
 			message.reply(app.lang({
 				en: "You don't have permissions to run this command",
 				es: "No tienes permisos para ejecutar este comando"

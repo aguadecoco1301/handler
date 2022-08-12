@@ -38,7 +38,7 @@ if(menu === "prefix" || menu === "prefijo") {
 	})
 	embed.setDescription(app.lang({
 		en: `Prefix: ${content}`,
-		es: `Prefijo: ${contedefa
+		es: `Prefijo: ${content}`
 	}, message))
 }
 
