@@ -89,9 +89,26 @@ for(const dirs of commandDirs) { //./commands/$
 
 // < ——		Log-in			—— >
 require('dotenv').config();
-app.client.login(process.env.token)
-.then(app.log("Log-in..."))
-.catch(error => console.error(error))
+
+function logError(error) {
+	console.error
+	app.log("Trying to reconnect...")
+}
+function login(token) {
+	app.client.login(token)
+	.then(app.log("Log-in..."))
+	.catch(error => {
+		console.error(error)
+		app.log("Trying to reconnect...")
+		login(process.env.token)
+	})
+}
+
+login(process.env.token)
+app.client.on('error', error => {
+	logError(error)
+	login(process.env.token)
+})
 
 // < ——		Extra			—— >
 
