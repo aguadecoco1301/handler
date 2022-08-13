@@ -19,7 +19,7 @@ exports.log = (text, ...args) => {
 exports.lang = ({...lang}, message) => {
 	let language = argv.lang || app.config.default.language
 	if(app.database.has(message.guildId.toString())) {
-		language = app.database.get(message.guildId.toString()).lang
+		language = app.database.get(message.guildId.toString()).language
 	}
 	return lang[language]
 }

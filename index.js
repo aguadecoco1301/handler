@@ -89,8 +89,7 @@ for(const dirs of commandDirs) { //./commands/$
 
 // < ——		Log-in			—— >
 require('dotenv').config();
-console.log(process.env.token)
-app.client.login(`${process.env.token}`)
+app.client.login(process.env.token)
 .then(app.log("Log-in..."))
 .catch(error => console.error(error))
 
