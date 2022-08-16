@@ -97,7 +97,9 @@ function login(token) {
 	.catch(error => {
 		console.error(error)
 		app.log("Trying to reconnect...")
-		login(process.env.token)
+		setTimeout(() => {
+			login(process.env.token)
+		}, 1000)
 	})
 }
 login(process.env.token)
