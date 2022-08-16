@@ -10,15 +10,14 @@ run: (app, message) => {
 	let cmd = args.shift()?.toLowerCase()
 
 	let commands = app.commands.get(cmd)
-	let config = app.commands._config.get(cmd)
 	let alias = app.commands.alias.get(cmd)
-
-	var command
 	if(commands) {
-		command = commands
+		var command = commands
+		var config = app.commands._config.get(cmd)
 	}
 	else if(alias) {
-		command = alias
+		var command = alias
+		var config = app.commands.alias._config.get(cmd)
 	}
 	else {
 		message.reply(app.lang({

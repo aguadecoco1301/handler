@@ -60,10 +60,11 @@ for(const file of eventsDir) {
 }
 
 // < ——		Command Handler		—— >
-app.commands		= new app.libs.discord.Collection()
-app.commands._config	= new app.libs.discord.Collection()
-app.commands.alias	= new app.libs.discord.Collection()
-const commandDirs	= app.libs.fs.readdirSync(app.config.commands.dir)
+app.commands			= new app.libs.discord.Collection()
+app.commands._config		= new app.libs.discord.Collection()
+app.commands.alias		= new app.libs.discord.Collection()
+app.commands.alias._config	= new app.libs.discord.Collection()
+const commandDirs		= app.libs.fs.readdirSync(app.config.commands.dir)
 for(const dirs of commandDirs) { //./commands/$
 	const commands = app.libs.fs.readdirSync(`${app.config.commands.dir}/${dirs}`).filter(f => f.endsWith(".js"))
 	commands.forEach(() => { //./commands/$comando/$
@@ -74,7 +75,7 @@ for(const dirs of commandDirs) { //./commands/$
 		if(cmdConf.alias) {
 			cmdConf.alias.map(alias => {
 				app.commands.alias.set(alias, cmd)
-				app.commands._config.set(alias, cmdConf)
+				app.commands.alias._config.set(alias, cmdConf)
 			})
 		}
 	})
