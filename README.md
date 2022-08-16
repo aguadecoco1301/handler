@@ -9,11 +9,11 @@ Put your bot token in a new file, call they ".data"
 
 The official version are 1.8.0
 
-# Fast config
+# Included commands
 
-The handler includes fast-config.js script. They help you to configure the bot.
-Run ```node fast-config.js```
-and complete all data
+1. help: Send you all commands with they aliases.
+2. config: You can configure the language and token of a server.
+3. example: Just a hello world, you can copy and paste the command to fast create a command
 
 # Slash commands
 
