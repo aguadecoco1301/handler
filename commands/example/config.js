@@ -5,6 +5,5 @@ module.exports = {
 		en: "A simple hello world script",
 		es: "Un simple código de hola mundo"
 	},
-	allow_slash: false,
 	permissions: ["ADMINISTRATOR"]
 }

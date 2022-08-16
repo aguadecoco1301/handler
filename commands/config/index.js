@@ -5,29 +5,31 @@ exports.run = (app, message, args) => {
 
 	const embed = new app.libs.discord.EmbedBuilder()
 	.setColor(0xFF0000)
-	.setTitle(app.lang({
-		en: "Configuration:",
-		es: "Configuración:"
-	}, message))
-	.addFields(
-	{
-		name: app.lang({
-			en: "Prefix:",
-			es: "Prefijo:"
-		}, message),
-		value: data.prefix,
-		inline: true
-	},
-	{
-		name: app.lang({
-			en: "Language:",
-			es: "Idioma:"
-		}, message),
-		value: data.language,
-		inline: true
-	})
-
-	if(!args[1]) return message.reply({embeds:[embed]})
+	if(!args[1]) {
+		embed.setTitle(app.lang({
+			en: "Configuration:",
+			es: "Configuración:"
+		}, message))
+		embed.addFields(
+		{
+			name: app.lang({
+				en: "Prefix:",
+				es: "Prefijo:"
+			}, message),
+			value: data.prefix,
+			inline: true
+		},
+		{
+			name: app.lang({
+				en: "Language:",
+				es: "Idioma:"
+			}, message),
+			value: data.language,
+			inline: true
+		})
+		message.reply({embeds: [embed]})
+		return
+	}
 
 	let menu = args[0].toLowerCase()
 	let content = args[1].toString()
@@ -52,5 +54,9 @@ exports.run = (app, message, args) => {
 			es: `Idioma: ${content}`
 		}, message))
 	}
+	embed.setTitle(app.lang({
+		en: "Changed configuration:",
+		es: "Configuración cambiada:"
+	}, message))
 	message.reply({embeds:[embed]})
 }

@@ -7,9 +7,10 @@
 /*
 	• Please, don't edit this file.
 	• This handler is in development, then, update
-	the handler is important.
+	them is very important.
 	• Modify "extra.js"
 */
+
 // < ——		App			—— >
 const app	= new Object()
 app.libs	= new Object()
@@ -50,12 +51,15 @@ const eventsDir = app.libs.fs.readdirSync(app.config.events.dir).filter(f => f.e
 for(const file of eventsDir) {
 	const event = require(`${app.config.events.dir}/${file}`)
 	app.client.on(event.name, (...args) => {
-		event.run(app, ...args)
+		try {
+			event.run(app, ...args)
+		} catch(error) {
+			console.log(error)
+		}
 	})
 }
 
 // < ——		Command Handler		—— >
-
 app.commands		= new app.libs.discord.Collection()
 app.commands._config	= new app.libs.discord.Collection()
 app.commands.alias	= new app.libs.discord.Collection()
@@ -73,9 +77,6 @@ for(const dirs of commandDirs) { //./commands/$
 				app.commands._config.set(alias, cmdConf)
 			})
 		}
-		if(cmdConf.allow_slash) {
-			//slash
-		}
 	})
 }
 /*
@@ -89,11 +90,6 @@ for(const dirs of commandDirs) { //./commands/$
 
 // < ——		Log-in			—— >
 require('dotenv').config();
-
-function logError(error) {
-	console.error
-	app.log("Trying to reconnect...")
-}
 function login(token) {
 	app.client.login(token)
 	.then(app.log("Log-in..."))
@@ -103,12 +99,7 @@ function login(token) {
 		login(process.env.token)
 	})
 }
-
 login(process.env.token)
-app.client.on('error', error => {
-	logError(error)
-	login(process.env.token)
-})
 
 // < ——		Extra			—— >
 
