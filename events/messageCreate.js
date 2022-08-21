@@ -3,7 +3,7 @@ name: "messageCreate",
 run: (app, message) => {
 	if(message.author.bot) return
 	globalThis._message = message // Send message to app.lang
-	message.lang = app.lang
+
 	let guild = message.guildId.toString()
 	let prefix = app.get(guild).prefix
 
@@ -22,7 +22,7 @@ run: (app, message) => {
 		var config = app.commands.alias._config.get(cmd)
 	}
 	else {
-		message.reply(message.lang({
+		message.reply(app.lang({
 			en: "Command not found",
 			es: "Comando no encontrado"
 		}))
@@ -31,7 +31,7 @@ run: (app, message) => {
 
 	if(config.permissions) {
 		if(!message.member.permissions.has(config.permissions)) {
-			message.reply(message.lang({
+			message.reply(app.lang({
 				en: "You don't have permissions to run this command",
 				es: "No tienes permisos para ejecutar este comando"
 			}))
