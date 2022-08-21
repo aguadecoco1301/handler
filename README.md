@@ -3,22 +3,17 @@ A complete Discord.js command and event handler! Miau
 
 # Token
 
-Put your bot token in a new file, call they ".data"
+Put your bot token in a new file, call they ".env"
 
 # Version
 
-The official version are 1.8.0
+The official version are 1.8.5
 
 # Included commands
 
 1. help: Send you all commands with they aliases.
 2. config: You can configure the language and token of a server.
 3. example: Just a hello world, you can copy and paste the command to fast create a command
-
-# Slash commands
-
-The handler support slash command, with the decision of add or not.
-Just change "allow_slash" in command config to true.
 
 # Configuration
 
@@ -38,20 +33,21 @@ The handler are in development, so, updating is necesary.
 Then, if you need input code in index.js, just put in extra.js.
 
 # app.lang
-The module reply return a text in a selected language, reffered by guild.
+The function lang return a text in a selected language, reffered by guild.
 The functionaly is easy:
 ```
 app.lang({
 	en: "Hi world!",
 	es: "Hola mundo!"
-}, message)
+})
 # output:
 # "Hi world!"
 # or:
 # "Hola mundo!"
 ```
 
-Change the default language in config.js, or running by ```node . --lang="LANG"```
+Change the default language in config.js.
+If you run `node . --lang="LANG"` all guilds languages changes to the input
 
 # app.log
 
