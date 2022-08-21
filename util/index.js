@@ -3,10 +3,6 @@ const { hideBin } = require('yargs/helpers')
 const argv = yargs(hideBin(process.argv)).argv
 const { color } = require('console-log-colors')
 
-let app
-exports.send = (appl) => {
-	app = appl
-}
 exports.log = (text, ...args) => {
 	if(argv.nolog) return
 	const isArgs = args.length !== 0
@@ -16,13 +12,15 @@ exports.log = (text, ...args) => {
 		console.log(`${color.cyan("[BOT]")}: ${text}`)
 	}
 }
-exports.lang = ({...lang}, message) => {
+exports.lang = ({...lang}) => {
 	if(argv.lang) return lang[argv.lang]
-	if(app.database.has(message.guildId.toString())) {
-		var language = app.database.get(message.guildId.toString()).language
+	if(app.database.has(_message.guildId.toString())) {
+		var language = app.database.get(_message.guildId.toString()).language
 	} else {
 		var language = app.config.default.language
 	}
+
+	if(!lang[language]) return lang[app.config.default.language]
 	return lang[language]
 }
 exports.get = (guild) => {

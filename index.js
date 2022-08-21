@@ -41,7 +41,7 @@ let util 	= require("./util/index.js")
 app.lang	= util.lang
 app.log		= util.log
 app.get		= util.get
-util.send(app)
+globalThis.app	= app
 
 // < ——		Database		—— >
 app.database	= new app.libs.JSONdb("data.json")

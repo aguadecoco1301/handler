@@ -9,13 +9,13 @@ exports.run = (app, message, args) => {
 		embed.setTitle(app.lang({
 			en: "Configuration:",
 			es: "Configuración:"
-		}, message))
+		}))
 		embed.addFields(
 		{
 			name: app.lang({
 				en: "Prefix:",
 				es: "Prefijo:"
-			}, message),
+			}),
 			value: data.prefix,
 			inline: true
 		},
@@ -23,7 +23,7 @@ exports.run = (app, message, args) => {
 			name: app.lang({
 				en: "Language:",
 				es: "Idioma:"
-			}, message),
+			}),
 			value: data.language,
 			inline: true
 		})
@@ -41,10 +41,14 @@ exports.run = (app, message, args) => {
 		embed.setDescription(app.lang({
 			en: `Prefix: ${content}`,
 			es: `Prefijo: ${content}`
-		}, message))
+		}))
 	}
 
 	if(menu === "language" || menu === "idioma") {
+		if(!app.config.languages.find(f => f === content)) return message.reply(app.lang({
+			en: `The language \`${content}\` doesn't exist.\n Try \`${app.config.languages.join(", ")}\``,
+			es: `El lenguaje \`${content}\` no existe.\nIntenta con \`${app.config.languages.join(", ")}\``
+		}))
 		app.database.set(guild, {
 			prefix: data.prefix,
 			language: content
@@ -52,11 +56,11 @@ exports.run = (app, message, args) => {
 		embed.setDescription(app.lang({
 			en: `Language: ${content}`,
 			es: `Idioma: ${content}`
-		}, message))
+		}))
 	}
 	embed.setTitle(app.lang({
 		en: "Changed configuration:",
 		es: "Configuración cambiada:"
-	}, message))
+	}))
 	message.reply({embeds:[embed]})
 }

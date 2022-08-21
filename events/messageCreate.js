@@ -2,6 +2,8 @@ module.exports = {
 name: "messageCreate",
 run: (app, message) => {
 	if(message.author.bot) return
+	globalThis._message = message // Send message to app.lang
+	message.lang = app.lang
 	let guild = message.guildId.toString()
 	let prefix = app.get(guild).prefix
 
@@ -20,19 +22,19 @@ run: (app, message) => {
 		var config = app.commands.alias._config.get(cmd)
 	}
 	else {
-		message.reply(app.lang({
+		message.reply(message.lang({
 			en: "Command not found",
 			es: "Comando no encontrado"
-		}, message))
+		}))
 		return
 	}
 
 	if(config.permissions) {
 		if(!message.member.permissions.has(config.permissions)) {
-			message.reply(app.lang({
+			message.reply(message.lang({
 				en: "You don't have permissions to run this command",
 				es: "No tienes permisos para ejecutar este comando"
-			}, message))
+			}))
 			return
 		}
 	}

@@ -5,18 +5,7 @@ let config = {
 	commands: {
 		dir: "./commands"
 	},
-	languages: {
-		en: {
-			name: "en",
-			comp: "English",
-			flag: "🇺🇸"
-		},
-		es: {
-			name: "es",
-			comp: "Español",
-			flag: "🇪🇸"
-		}
-	},
+	languages: ["en", "es"],
 	default: {
 		language: "en", //Default language
 		prefix: "." //Default prefix

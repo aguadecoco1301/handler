@@ -4,14 +4,14 @@ exports.run = (app, message, args) => {
 	.setTitle(app.lang({
 		en: "Help",
 		es: "Ayuda"
-	}, message))
+	}))
 	app.commands._config.map(cmd => {
 		embed.addFields({
 			name: cmd.name,
 			value: `**Alias: [${cmd.alias.join(", ")}]**\n` + app.lang({
 				en: cmd.description.en,
 				es: cmd.description.es
-			}, message)
+			})
 		})
 	})
 
