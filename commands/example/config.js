@@ -1,9 +1,5 @@
-module.exports = {
-	name: "example",
-	alias: ["ping", "hi", "hola"],
-	description: {
-		en: "A simple hello world script",
-		es: "Un simple código de hola mundo"
-	},
-	permissions: ["ADMINISTRATOR"]
-}
+const discord = require("discord.js")
+module.exports = new discord.SlashCommandBuilder()
+	.setName("example")
+	.setDescription("A simple hello world script")
+	.setDefaultMemberPermissions(discord.PermissionFlagsBits.Administrator)

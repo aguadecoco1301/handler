@@ -1,0 +1,3 @@
+To start, use:
+npm init -y
+npm i discord.js yargs console-log-colors simple-json-db @discord.js/rest

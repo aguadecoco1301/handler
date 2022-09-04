@@ -1,9 +1,11 @@
-/*							*\
+/*														 *\
 ===========================================================
-≈≈≈		★ Developer: AguaDeCoco#1301            ≈≈≈
-≈≈≈		☆ Made with ♡ in Argentina	        ≈≈≈
+≈≈≈		★ Developer: AguaDeCoco#1301           		 	≈≈≈
+≈≈≈		☆ Made with ♡ in Argentina	        			≈≈≈
 ===========================================================
-\*							*/
+\*														 */
+
+
 /*
 	• Please, don't edit this file.
 	• This handler is in development, then, update
@@ -11,48 +13,25 @@
 	• Modify "extra.js"
 */
 
-// < ——		App			—— >
-const app	= new Object()
-app.libs	= new Object()
-
-/*
-	• app is a global object.
-	• You can save variables; libraries; and
-	more, for next use that in any part of
-	the code.
-	• You can edit that how you need
-*/
-
 // < —— 	Libraries		—— >
-app.libs.discord= require("discord.js")
-app.libs.fs	= require("fs")
-app.libs.JSONdb = require("simple-json-db")
+const discord	= require("discord.js")
+const fs		= require("fs")
+
 // < ——		Discord Client		—— >
-app.client 	= new app.libs.discord.Client({
+const client 	= new discord.Client({
 	intents: [
-		app.libs.discord.GatewayIntentBits.MessageContent,
-		new app.libs.discord.IntentsBitField(32767)
+		new discord.IntentsBitField(32767)
 	]
 })
-app.config	= require("./config.js")
-
-// < ——		Util			—— >
-let util 	= require("./util/index.js")
-app.lang	= util.lang
-app.log		= util.log
-app.get		= util.get
-globalThis.app	= app
-
-// < ——		Database		—— >
-app.database	= new app.libs.JSONdb("data.json")
+client.config	= require("./config.js")
 
 // < —— 	Event Handler    	—— >
-const eventsDir = app.libs.fs.readdirSync(app.config.events.dir).filter(f => f.endsWith(".js"))
+const eventsDir = fs.readdirSync(client.config.events.dir).filter(f => f.endsWith(".js"))
 for(const file of eventsDir) {
-	const event = require(`${app.config.events.dir}/${file}`)
-	app.client.on(event.name, (...args) => {
+	const event = require(`${client.config.events.dir}/${file}`)
+	client.on(event.name, (...args) => {
 		try {
-			event.run(app, ...args)
+			event.run(client, ...args)
 		} catch(error) {
 			console.log(error)
 		}
@@ -60,43 +39,35 @@ for(const file of eventsDir) {
 }
 
 // < ——		Command Handler		—— >
-app.commands			= new app.libs.discord.Collection()
-app.commands._config		= new app.libs.discord.Collection()
-app.commands.alias		= new app.libs.discord.Collection()
-app.commands.alias._config	= new app.libs.discord.Collection()
-const commandDirs		= app.libs.fs.readdirSync(app.config.commands.dir)
-for(const dirs of commandDirs) { //./commands/$
-	const commands = app.libs.fs.readdirSync(`${app.config.commands.dir}/${dirs}`).filter(f => f.endsWith(".js"))
-	commands.forEach(() => { //./commands/$comando/$
-		const cmdConf	= require(`./${app.config.commands.dir}/${dirs}/config.js`)
-		const cmd	= require(`./${app.config.commands.dir}/${dirs}/index.js`)
-		app.commands.set(cmdConf.name, cmd)
-		app.commands._config.set(cmdConf.name, cmdConf)
-		if(cmdConf.alias) {
-			cmdConf.alias.map(alias => {
-				app.commands.alias.set(alias, cmd)
-				app.commands.alias._config.set(alias, cmdConf)
-			})
-		}
-	})
+client.commands			= new discord.Collection()
+client.commands._config	= new discord.Collection()
+const commandDirs		= fs.readdirSync(client.config.commands.dir)
+for(const dirs of commandDirs) {
+	const cmdConf	= require(`./${client.config.commands.dir}/${dirs}/config.js`)
+	const cmd		= require(`./${client.config.commands.dir}/${dirs}/index.js`)
+	client.commands.set(cmdConf.name, cmd)
+	client.commands._config.set(cmdConf.name, cmdConf)
+	console.log(cmdConf)
 }
-/*
-
-	• The command's config is saved in the object
-	app.commands._config
-	• The command's aliases is saved in the object
-	app.commands.alias
-
-*/
 
 // < ——		Log-in			—— >
 require('dotenv').config();
+const rest = new discord.REST({ version: '10' })
+.setToken(process.env.token);
+
+(async() => {
+	console.log(`Started refreshing ${client.commands.length} application (/) commands.`);
+	let data = await rest.put(
+		discord.Routes.applicationCommands(client.config.user_id),{ body: client.commands._config }
+	)
+	console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+})()
 function login(token) {
-	app.client.login(token)
-	.then(app.log("Log-in..."))
+	client.login(token)
+	.then(console.log("Log-in..."))
 	.catch(error => {
 		console.error(error)
-		app.log("Trying to reconnect...")
+		console.log("Trying to reconnect...")
 		setTimeout(() => {
 			login(process.env.token)
 		}, 1000)
@@ -107,4 +78,4 @@ login(process.env.token)
 // < ——		Extra			—— >
 
 let extra = require("./extra.js")
-extra(app)
+extra(client)

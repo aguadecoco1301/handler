@@ -1,4 +1,5 @@
 let config = {
+	client_id: "1014363937518669936",
 	events: {
 		dir: "./events"
 	},

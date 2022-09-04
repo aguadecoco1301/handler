@@ -1,19 +1,14 @@
-exports.run = (app, message, args) => {
-	const embed = new app.libs.discord.EmbedBuilder()
+const discord = require("discord.js")
+exports.run = (app, interaction, args) => {
+	const embed = discord.EmbedBuilder()
 	.setColor(0xFF0000)
-	.setTitle(app.lang({
-		en: "Help",
-		es: "Ayuda"
-	}))
+	.setTitle("Help")
 	app.commands._config.map(cmd => {
 		embed.addFields({
 			name: cmd.name,
-			value: `**Alias: [${cmd.alias.join(", ")}]**\n` + app.lang({
-				en: cmd.description.en,
-				es: cmd.description.es
-			})
+			value: cmd.description
 		})
 	})
 
-	message.reply({embeds: [embed]})
+	interaction.reply({embeds: [embed]})
 }

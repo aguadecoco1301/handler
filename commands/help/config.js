@@ -1,9 +1,4 @@
-module.exports = {
-	name: "help",
-	alias: ["h", "ayuda", "?"],
-	description: {
-		en: "Send you help! 🛥🚨",
-		es: "Te envía ayuda! 🛥🚨"
-	},
-	permissions: []
-}
+const { SlashCommandBuilder } = require("discord.js")
+module.exports = new SlashCommandBuilder()
+	.setName("help")
+	.setDescription("Send you help! 🛥🚨")
