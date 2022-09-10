@@ -1,16 +1,5 @@
 let config = {
-	client_id: "YOUR CLIENT ID",
-	events: {
-		dir: "./events"
-	},
-	commands: {
-		dir: "./commands"
-	},
-	languages: ["en", "es"],
-	default: {
-		language: "en", //Default language
-		prefix: "." //Default prefix
-	}
+	client_id: "1003101065060827176",
 }
 
 module.exports = config

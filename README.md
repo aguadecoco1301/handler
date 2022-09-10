@@ -2,71 +2,23 @@
 A complete Discord.js command and event handler! Miau
 
 # Token
-
-Put your bot token in a new file, call they ".env"
+Put your token in a new file, call they ".env"
 
 # Version
+The actuallity version is 2.0.0
 
-The official version are 1.8.5
+# Interactions
+In interactions folder, you can encounter others interactions:
+1. Commands
+2. Buttons
+3. Modals
 
 # Included commands
-
-1. help: Send you all commands with they aliases.
-2. config: You can configure the language and token of a server.
-3. example: Just a hello world, you can copy and paste the command to fast create a command
-
-# Configuration
-
-The handler are so configurable, there's a list with all modifications what you can edit
-
-1) Token:
-	Configurate the token are required.
-	Only put your bot token in config.js > Token. 
-2) Events & Commands folders:
-	In config.js are listed two folders, you can modify the names.
-3) Default prefix & language:
-	In default of config.js you can change "language" for spanish changing "en" for "es", and default token.
+1. help: Send you all commands
+2. example: Just a hello world script. You can copy and paste the command to fast create a command
 
 # extra.js
+The handler are in development, so, updating is necesary. Then, if you need input code in index.js, just put in extra.js.
 
-The handler are in development, so, updating is necesary.
-Then, if you need input code in index.js, just put in extra.js.
-
-# app.lang
-The function lang return a text in a selected language, reffered by guild.
-The functionaly is easy:
-```
-app.lang({
-	en: "Hi world!",
-	es: "Hola mundo!"
-})
-# output:
-# "Hi world!"
-# or:
-# "Hola mundo!"
-```
-
-Change the default language in config.js.
-If you run `node . --lang="LANG"` all guilds languages changes to the input
-
-# app.log
-
-The log module send text in console.
-Can be occulted running ```node . --no-log```
-
-The functionaly is:
-```
-// • Simple:
-
-app.log("Hi")
-
-#output: 
-#[BOT]: Hi
-
-// • Complete:
-var fruits = ["apple", "orange", "tomato"]
-app.log("Fruits", fruits)
-
-#output: 
-#[BOT]: Fruits: apple, orange, tomato
-```
+# Developer
+For questions you can find me in discord: AguaDeCoco#1301

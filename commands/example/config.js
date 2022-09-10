@@ -1,5 +1,0 @@
-const discord = require("discord.js")
-module.exports = new discord.SlashCommandBuilder()
-	.setName("example")
-	.setDescription("A simple hello world script")
-	.setDefaultMemberPermissions(discord.PermissionFlagsBits.Administrator)
