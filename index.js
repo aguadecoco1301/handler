@@ -28,7 +28,7 @@ client.commands = []
 const commandsDir = fs.readdirSync("./interactions/commands").filter(f=>f.endsWith(".js"))
 for (const file of commandsDir) {
 	const command = require(`./interactions/commands/${file}`);
-	client.commands.push(command.toJSON(),);
+	client.commands.push(command);
 }
 
 
@@ -40,11 +40,14 @@ const rest = new REST({ version: '10' }).setToken(process.env.token);
 
 (async () => {
 	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
+		console.log(`Started refreshing ${client.commands.length} application (/) commands.`);
+		let datas = []
+		client.commands.forEach((c) => {
+			datas.push(c.data)
+		})
 		const data = await rest.put(
 			discord.Routes.applicationCommands(client.config.client_id),
-			{ body: client.commands.forEach(c => c.data) },
+			{ body: datas },
 		);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
