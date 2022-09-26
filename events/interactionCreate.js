@@ -3,7 +3,7 @@ module.exports = {
 	run: async(client, interaction) => {
 		try {
 			if(interaction.isChatInputCommand()) {
-				let command = client.commands.get(interaction.commandName)
+				let command = client.commands.find(f => f.data.name == interaction.commandName)
 				if(!command) return
 				await command.run(client, interaction)
 			}
