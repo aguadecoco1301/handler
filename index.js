@@ -24,11 +24,14 @@ for(let file of events) {
     })
 }
 
-client.commands = []
-const commandsDir = fs.readdirSync("./interactions/commands").filter(f=>f.endsWith(".js"))
+client.commands = new discord.Collection()
+let commands = []
+const commandsDir = fs.readdirSync("./commands")
 for (const file of commandsDir) {
-	const command = require(`./interactions/commands/${file}`);
-	client.commands.push(command);
+	const commandRun = require(`./commands/${file}/index.js`)
+	const command = require(`./commands/${file}/data.js`);
+	commands.push(command)
+	client.commands.set(command.name, commandRun)
 }
 
 
@@ -40,14 +43,11 @@ const rest = new REST({ version: '10' }).setToken(process.env.token);
 
 (async () => {
 	try {
-		console.log(`Started refreshing ${client.commands.length} application (/) commands.`);
-		let datas = []
-		client.commands.forEach((c) => {
-			datas.push(c.data)
-		})
+		console.log(`Started refreshing ${commands.length} application (/) commands.`);
+		console.log(commands)
 		const data = await rest.put(
 			discord.Routes.applicationCommands(client.config.client_id),
-			{ body: datas },
+			{ body: commands },
 		);
 
 		console.log(`Successfully reloaded ${data.length} application (/) commands.`);

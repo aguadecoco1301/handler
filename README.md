@@ -8,10 +8,10 @@ Put your token in a new file, call they ".env"
 The actuallity version is 2.0.0
 
 # Interactions
-In interactions folder, you can encounter others interactions:
-1. Commands
-2. Buttons
-3. Modals
+Interactions has not saved in a "interactions" folder. You can put your action buttons in the folder of your command. See example command. 
+You can save
+1. Buttons
+2. Modals
 
 # Included commands
 1. help: Send you all commands

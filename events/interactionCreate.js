@@ -8,13 +8,13 @@ module.exports = {
 				await command.run(client, interaction)
 			}
 			if(interaction.isButton()) {
-				let button = require(`../interactions/buttons/${interaction.customId}`)
+				let button = require(`../${interaction.customId}`)
 				if(!button) return
 				await button(client, interaction)
 			}
 			if(interaction.isModalSubmit()) {
 				console.log(interaction)
-				let modal = require(`../interactions/modals/${interaction.customId}`)
+				let modal = require(`../${interaction.customId}`)
 				if(!modal) return
 				await modal(client, interaction)
 			}

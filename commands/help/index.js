@@ -17,7 +17,7 @@ module.exports = {
 		let button = new ActionRowBuilder()
 		.addComponents(
 			new ButtonBuilder()
-			.setCustomId("help")
+			.setCustomId("commands/help/buttons/help.js")
 			.setLabel("You can help me?")
 			.setStyle(ButtonStyle.Primary)
 		)
