@@ -12,7 +12,9 @@ Interactions has not saved in a "interactions" folder. You can put your action b
 You can save
 1. Buttons
 2. Modals
-
+3. Auto completes
+4. Selection menus
+5. Context menus
 # Included commands
 1. help: Send you all commands
 2. example: Just a hello world script. You can copy and paste the command to fast create a command
