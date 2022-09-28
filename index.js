@@ -44,7 +44,6 @@ const rest = new REST({ version: '10' }).setToken(process.env.token);
 (async () => {
 	try {
 		console.log(`Started refreshing ${commands.length} application (/) commands.`);
-		console.log(commands)
 		const data = await rest.put(
 			discord.Routes.applicationCommands(client.config.client_id),
 			{ body: commands },
