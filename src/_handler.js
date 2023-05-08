@@ -2,7 +2,6 @@ const fs = require("node:fs")
 const path = require("node:path")
 const discord = require("discord.js")
 module.exports = (client) => {
-    
     let commands = []
     client.commands = new discord.Collection()
 
@@ -14,7 +13,7 @@ module.exports = (client) => {
     })
 
     new discord.REST().setToken(process.env.token)
-    .put(discord.Routes.applicationCommands(process.env.id), { body: commands })
+        .put(discord.Routes.applicationCommands(process.env.id), { body: commands })
     
     fs.readdirSync(path.join(__dirname, "events"))
     .forEach((file) => {

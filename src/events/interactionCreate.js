@@ -4,4 +4,7 @@ module.exports = (client, interaction) => {
         if(!command) return;
         command(client, interaction)
     }
+    if(interaction.isButton()) {
+        //require(interaction.customId)(client, interaction)
+    }
 }
