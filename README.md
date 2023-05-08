@@ -1,4 +1,4 @@
-# discordjs-pro-command-handler
+# DiscordJS Handler
 A complete Discord.js command and event handler!
 
 # Recoded
