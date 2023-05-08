@@ -2,16 +2,16 @@ const discord = require("discord.js")
 module.exports = {
     data: new discord.SlashCommandBuilder()
           .setName("test")
-          .setDescription("asd"),
+          .setDescription("Command for test"),
     code: async(client, interaction) => {
         let button = new discord.ActionRowBuilder().addComponents(
             new discord.ButtonBuilder()
             .setCustomId(path.join(__dirname, "buttons", "test.js"))
-            .setLabel("¡Tócame!")
+            .setLabel("Touch me!")
             .setStyle(discord.ButtonStyle.Primary)
         )
         let response = await interaction.reply({ 
-            content:"A ver si sos un capo...",
+            content:"Touch me!",
             components: [button]
         })
 
@@ -20,7 +20,7 @@ module.exports = {
 	        const confirmation = await response.awaitMessageComponent({ filter: collectorFilter, time: 10000 });
             execute(confirmation.customId, client, interaction)
         } catch (e) {
-	        await interaction.editReply({ content: 'No me tocaste :c', components: [] });
+	        await interaction.editReply({ content: "You don't touched me", components: [] });
         }
     }
 }
